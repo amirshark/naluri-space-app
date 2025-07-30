@@ -95,8 +95,7 @@ npm start
 
 ```bash
 # Clone the project
-git clone https://github.com/your-username/naluri-pi-calculator.git
-cd mobile
+git clone https://github.com/amirshark/naluri-space-app
 
 # Install dependencies
 npm install
