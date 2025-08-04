@@ -1,47 +1,44 @@
-# 🌞 Naluri Mobile Coding Challenge: Solar System π Calculator
+# Naluri Mobile Coding Challenge – Frontend (React Native)
 
 ## 🚀 Introduction
 
-The **Naluri space project** is investigating how we could model the solar system. As a first step, this project calculates the circumference of the Sun using a dynamically computed value of Pi (π) that increases in precision over time. The solution consists of a backend server that continuously calculates Pi and a mobile app that displays real-time solar system data using this value.
+This is the mobile frontend for the Naluri Tech Assessment project. It simulates a space mission system UI that calculates and visualizes the value of Pi to increasing precision, and applies it in planetary circumference estimations. Built with **React Native + Expo**, it connects to a custom backend API that performs Pi calculations and supports interactive controls and real-time visualization.
 
 ---
 
-## ✨ Features
+## 📱 App Features
 
-### 🧠 Backend Server
-- Calculates Pi to increasing decimal accuracy (e.g., 3 → 3.1 → 3.14 …).
-- Saves and serves the most accurate computed value.
-- Exposes HTTP API to:
-  - Get latest Pi value.
-  - Start calculation.
-  - Pause calculation.
-  - Reset Pi to base state.
+### 🧮 Pi Dashboard
+- Displays live Pi value with improving accuracy (e.g. 3 → 3.1 → 3.14 → …).
+- Progress bar visualizing current decimal accuracy.
+- Control buttons: `Start`, `Pause`, `Reset`.
+- Themed with a sci-fi look using `react-native-paper`.
 
-### 📱 React Native Mobile App
-#### Screen 1: **Pi Calculator Dashboard**
-- Displays the current value of Pi and its accuracy.
-- Start, Pause, Reset controls.
-- Progress bar visualizing precision.
-- Live polling every 2 seconds from the backend.
+### 🌍 Solar System Calculator
+- Displays calculated circumferences of Sun, Earth, and Mars based on current Pi.
+- Unit toggle (km ↔ mi).
+- Values update in real-time as Pi improves.
+- Visual bar comparison of planet sizes (optional).
 
-#### Screen 2: **Solar System Calculator**
-- Calculates circumferences of the Sun, Earth, and Mars.
-- Switch between **km** and **miles**.
-- Visual comparisons using styled text/bars.
-- Reacts immediately to Pi changes.
+### 🕒 Pi History Page
+- Shows a timeline of Pi values calculated over time.
+- Useful for debugging and historical insight.
+- Available as a separate screen.
 
-### ⚙️ State Management & UX
-- Global state using Zustand.
-- State persistence using AsyncStorage.
-- Cross-screen reactivity.
-- Optimistic UI updates and error handling.
-- Offline-safe with resume support.
+### 🎨 UI & Theming
+- Custom sci-fi themed color palette.
+- Responsive UI components via `react-native-paper`.
+- Dark/light mode ready via dynamic theme provider.
 
-### 🎨 UI & Theme
-- Sci-Fi inspired dark/light theme using React Native Paper.
-- Smooth splash screen that waits for fonts + minimum 5s delay.
-- Tab navigation with icons.
-- Custom app icon and splash assets via [IconKitchen](https://icon.kitchen/).
+### 🧠 State Management
+- Powered by `zustand` and `AsyncStorage`.
+- Cross-screen shared state with reactivity.
+- Fully persistent across app restarts.
+- Optimistic UI with graceful error handling.
+
+### 🔠 Fonts & Splash
+- Custom fonts loaded before app starts.
+- Splash screen remains visible for at least 5 seconds or until assets are ready.
 
 ---
 
@@ -67,27 +64,6 @@ The **Naluri space project** is investigating how we could model the solar syste
 - npm / yarn
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
 - Expo Go (for mobile testing)
-
----
-
-### 💻 Backend Setup
-
-```bash
-cd backend
-npm install
-npm start
-```
-
-> The server runs on `http://localhost:3000` (configurable).
-
-**API Endpoints:**
-
-| Method | Endpoint      | Description                   |
-|--------|---------------|-------------------------------|
-| GET    | `/pi`         | Get current value of Pi       |
-| POST   | `/start`      | Start Pi calculation          |
-| POST   | `/pause`      | Pause calculation             |
-| POST   | `/reset`      | Reset Pi to 3.00              |
 
 ---
 
@@ -117,6 +93,19 @@ npm start
 ```
 
 Then scan the QR with Expo Go.
+
+---
+
+## 📝 Folder Structure
+
+```
+/components
+  /lib         # Zustand store, theme, hooks
+  /utils       # Planet data, helpers
+/pages          # PiDashboard, SolarCalculator, History
+assets          # Fonts, splash image
+App.js
+```
 
 ---
 
@@ -162,8 +151,14 @@ eas build -p android --profile preview
 
 ---
 
-## 📄 License
+## 📩 Submission Info
 
-This project is open-source and available under the [MIT License](LICENSE).
+- App and backend are in separate folders.
+- Includes `.git` history with progressive commits.
+- README files in both frontend and backend folders.
 
 ---
+
+## 📄 License
+
+This project is part of the Naluri Tech Assessment and is intended for evaluation purposes only.
