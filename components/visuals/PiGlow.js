@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, Dimensions, StyleSheet, View } from "react-native";
+const { width } = Dimensions.get('window');
 
 // Pulsing glow effect for Pi display
 const PiGlow = ({ children, isRunning }) => {
@@ -46,10 +47,10 @@ const styles = StyleSheet.create({
     },
     piGlow: {
         position: 'absolute',
-        width: 200,
-        height: 100,
+        width: width*0.8,
+        height: 130,
         backgroundColor: '#00ffff',
-        borderRadius: 50,
+        borderRadius: 100,
         opacity: 0.1,
         top: 10,
     },

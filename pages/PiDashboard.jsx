@@ -5,6 +5,8 @@ import { usePiStore } from '@/components/lib/store';
 import PiGlow from '@/components/visuals/PiGlow';
 import AnimatedStars from '@/components/visuals/AnimatedStars';
 import CircuitLines from '@/components/visuals/CircuitLines';
+import DataStreams from '@/components/visuals/DataStreams';
+import OrbitalRings from '@/components/visuals/OrbitalRings';
 
 export default function PiDashboard() {
   const { pi, accuracy, isRunning, fetchPi, start, pause, reset } = usePiStore();
@@ -20,12 +22,12 @@ export default function PiDashboard() {
 
   return (
     <View style={[styles.container, { backgroundColor: '#0a0a0f' }]}>
-      {/* Animated starfield background */}
+      {/* Animated backgrounds */}
       <AnimatedStars />
-      
-      {/* Circuit pattern overlay */}
+      <DataStreams />
+      <OrbitalRings />
       <CircuitLines />
-      
+
       {/* Main dashboard card */}
       <Card style={styles.mainCard}>
         <Card.Content style={styles.cardContent}>
@@ -41,9 +43,8 @@ export default function PiDashboard() {
           {/* Pi display with glow effect */}
           <PiGlow isRunning={isRunning}>
             <View style={styles.piContainer}>
-              <Text variant="displaySmall" style={styles.piSymbol}>π</Text>
               <Text variant="headlineLarge" style={styles.piValue}>
-                {pi}
+                π ≈ {pi}
               </Text>
             </View>
           </PiGlow>
@@ -117,7 +118,7 @@ export default function PiDashboard() {
 
           {/* Status indicator */}
           <View style={styles.statusContainer}>
-            <View style={[styles.statusIndicator, { 
+            <View style={[styles.statusIndicator, {
               backgroundColor: isRunning ? '#00ff00' : '#ff6b00',
               shadowColor: isRunning ? '#00ff00' : '#ff6b00'
             }]} />
@@ -175,9 +176,10 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
   },
   piContainer: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'center',
+    position: 'relative',
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 40
   },
   piSymbol: {
     color: '#00ffff',
@@ -193,6 +195,7 @@ const styles = StyleSheet.create({
     textShadowColor: '#00ffff',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+    textAlign: "center",
   },
   accuracyContainer: {
     marginBottom: 25,

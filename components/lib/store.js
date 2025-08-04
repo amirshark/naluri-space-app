@@ -6,6 +6,7 @@ import { API_BASE } from '@env';
 export const usePiStore = create(persist(
   (set) => ({
     pi: 3,
+    piHistory: [3],
     accuracy: 0,
     isRunning: false,
 
@@ -13,7 +14,17 @@ export const usePiStore = create(persist(
       try {
         const res = await fetch(`${API_BASE}/pi`);
         const data = await res.json();
-        set({ pi: data.pi, accuracy: data.accuracy });
+        set((state) => {
+          const newPi = data.pi;
+          if (!state.piHistory.includes(newPi)) {
+            return {
+              pi: newPi,
+              accuracy: data.accuracy,
+              piHistory: [...state.piHistory, newPi]
+            };
+          }
+          return { pi: newPi, accuracy: data.accuracy };
+        });
       } catch (err) {
         console.error('Failed to fetch Pi:', err);
       }

@@ -6,9 +6,11 @@ import { PLANET_RADII } from '@/components/utils/planets';
 import AnimatedStars from '@/components/visuals/AnimatedStars';
 import OrbitalRings from '@/components/visuals/OrbitalRings';
 import PlanetIcon from '@/components/visuals/PlanetIcon';
+import DataStreams from '@/components/visuals/DataStreams';
+import PiGlow from '@/components/visuals/PiGlow';
 
 export default function SolarCalculator() {
-  const { pi } = usePiStore();
+  const { pi, isRunning } = usePiStore();
   const [isMiles, setIsMiles] = useState(false);
 
   const unit = isMiles ? 'mi' : 'km';
@@ -25,6 +27,7 @@ export default function SolarCalculator() {
       {/* Animated background */}
       <AnimatedStars />
       <OrbitalRings />
+      <DataStreams />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Card style={styles.mainCard}>
@@ -39,15 +42,17 @@ export default function SolarCalculator() {
             </View>
 
             {/* Pi display */}
-            <View style={styles.piContainer}>
-              <View style={styles.piGlow} />
-              <Text variant="titleLarge" style={styles.piLabel}>
-                QUANTUM π VALUE
-              </Text>
-              <Text variant="headlineLarge" style={styles.piValue}>
-                π ≈ {pi}
-              </Text>
-            </View>
+            <PiGlow isRunning={isRunning}>
+              <View style={styles.piContainer}>
+                {/* <View style={styles.piGlow} /> */}
+                <Text variant="titleLarge" style={styles.piLabel}>
+                  QUANTUM π VALUE
+                </Text>
+                <Text variant="headlineLarge" style={styles.piValue}>
+                  π ≈ {pi}
+                </Text>
+              </View>
+            </PiGlow>
 
             {/* Unit switcher */}
             <View style={styles.unitContainer}>
@@ -131,12 +136,11 @@ export default function SolarCalculator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    justifyContent: 'center',
+    padding: 20,
   },
   mainCard: {
-    backgroundColor: 'rgba(10, 20, 40, 0.95)',
+    backgroundColor: 'rgba(10, 20, 40, 0.9)',
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#00ffff',
@@ -176,17 +180,7 @@ const styles = StyleSheet.create({
   piContainer: {
     position: 'relative',
     alignItems: 'center',
-    marginBottom: 30,
     padding: 20,
-  },
-  piGlow: {
-    position: 'absolute',
-    width: 250,
-    height: 80,
-    backgroundColor: '#00ffff',
-    borderRadius: 40,
-    opacity: 0.1,
-    top: 15,
   },
   piLabel: {
     color: '#00ffff',
@@ -202,6 +196,7 @@ const styles = StyleSheet.create({
     textShadowColor: '#00ffff',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+    textAlign: "center",
   },
   unitContainer: {
     marginBottom: 30,

@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as SplashScreen from 'expo-splash-screen';
 import PiDashboard from './pages/PiDashboard';
 import SolarCalculator from './pages/SolarCalculator';
+import PiHistory from './pages/PiHistory';
 import { PaperProvider } from 'react-native-paper';
 import { useThemeMode } from './components/lib/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -36,7 +37,8 @@ export default function App() {
                 iconName = 'pi'; // π icon
               } else if (route.name === 'Solar Calculator') {
                 iconName = 'earth'; // Planet icon
-              }
+              } else
+                iconName = 'clock'; // History icon
 
               return (
                 <MaterialCommunityIcons name={iconName} size={size} color={color} />
@@ -54,6 +56,7 @@ export default function App() {
           })}>
           <Tab.Screen name="Pi Dashboard" component={PiDashboard} />
           <Tab.Screen name="Solar Calculator" component={SolarCalculator} />
+          <Tab.Screen name="Pi History" component={PiHistory} />
         </Tab.Navigator>
       </NavigationContainer>
     </PaperProvider>
